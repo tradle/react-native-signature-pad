@@ -44,8 +44,9 @@ export default class Demo extends Component {
     console.error(error);
   };
 
-  _signaturePadChange = ({base64DataUrl}) => {
-    console.log("Got new signature: " + base64DataUrl);
+  _signaturePadChange = ({ url, width, height }) => {
+    // url is a data url
+    console.log("Got new signature: " + url);
   };
 }
 ```

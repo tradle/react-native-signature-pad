@@ -37,7 +37,7 @@ class SignaturePad extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {base64DataUrl: props.dataURL || null};
+    this.state = {url: props.dataURL || null};
     const { backgroundColor } = StyleSheet.flatten(props.style);
     var injectedJavaScript = injectedExecuteNativeFunction
       + injectedErrorHandler
@@ -104,9 +104,9 @@ class SignaturePad extends Component {
     this.props.onError({details: args});
   };
 
-  _bridged_finishedStroke = ({base64DataUrl}) => {
-    this.props.onChange({base64DataUrl});
-    this.setState({base64DataUrl});
+  _bridged_finishedStroke = data => {
+    this.props.onChange(data);
+    this.setState(data);
   };
 
   _renderError = (args) => {
