@@ -16,6 +16,8 @@ import injectedApplication from './injectedJavaScript/application';
 import injectedErrorHandler from './injectedJavaScript/errorHandler';
 import injectedExecuteNativeFunction from './injectedJavaScript/executeNativeFunction';
 
+const flipKey = key => key === '0' ? '1' : '0'
+
 class SignaturePad extends Component {
 
   static propTypes = {
@@ -37,7 +39,8 @@ class SignaturePad extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {url: props.dataURL || null};
+
+    this._reinitState();
     const { backgroundColor } = StyleSheet.flatten(props.style);
     var injectedJavaScript = injectedExecuteNativeFunction
       + injectedErrorHandler
@@ -117,9 +120,24 @@ class SignaturePad extends Component {
 
   };
 
+  _reinitState = () => {
+    this.state = {url: this.props.dataURL || null};
+  };
+
+  clear = () => {
+    const { key } = this.state
+    this._reinitState();
+    // force re-render
+    this.setState({
+      ...this.state,
+      key: flipKey(key)
+    });
+  };
+
   render = () => {
     return (
-        <WebView automaticallyAdjustContentInsets={false}
+        <WebView key={this.state.key}
+                 automaticallyAdjustContentInsets={false}
                  onNavigationStateChange={this._onNavigationChange}
                  renderError={this._renderError}
                  renderLoading={this._renderLoading}
