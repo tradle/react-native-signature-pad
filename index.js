@@ -134,11 +134,17 @@ class SignaturePad extends Component {
     });
   };
 
+  onMessage = (event) => {
+    var base64DataUrl = JSON.parse(event.nativeEvent.data);
+    this._bridged_finishedStroke(base64DataUrl);
+  };
+
   render = () => {
     return (
         <WebView key={this.state.key}
                  automaticallyAdjustContentInsets={false}
                  onNavigationStateChange={this._onNavigationChange}
+                 onMessage={this.onMessage}
                  renderError={this._renderError}
                  renderLoading={this._renderLoading}
                  source={this.source}
