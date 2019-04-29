@@ -151,3 +151,4 @@ class SignaturePad extends Component {
   };
 }
 
+module.exports = SignaturePad;
