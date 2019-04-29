@@ -1,13 +1,11 @@
-'use strict';
-
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {
-  View,
-  ViewPropTypes,
-  WebView,
   StyleSheet,
+  View,
+  ViewPropTypes
 } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 
 import htmlContent from './injectedHtml';
@@ -19,13 +17,12 @@ import injectedExecuteNativeFunction from './injectedJavaScript/executeNativeFun
 const flipKey = key => key === '0' ? '1' : '0'
 
 class SignaturePad extends Component {
-
   static propTypes = {
     onChange: PropTypes.func,
     onError: PropTypes.func,
     style: ViewPropTypes.style,
     penColor: PropTypes.string,
-    dataURL: PropTypes.string,
+    dataURL: PropTypes.string
   };
 
   static defaultProps = {
@@ -108,7 +105,7 @@ class SignaturePad extends Component {
   };
 
   _bridged_finishedStroke = data => {
-    this.props.onChange(data);
+    this.props.onChange({ url: data.base64DataUrl });
     this.setState(data);
   };
 
@@ -154,4 +151,3 @@ class SignaturePad extends Component {
   };
 }
 
-module.exports = SignaturePad;
