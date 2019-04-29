@@ -105,7 +105,7 @@ class SignaturePad extends Component {
   };
 
   _bridged_finishedStroke = data => {
-    this.props.onChange({ url: data.base64DataUrl });
+    this.props.onChange(data);
     this.setState(data);
   };
 
