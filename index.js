@@ -5,7 +5,7 @@ import {
   View,
   ViewPropTypes
 } from 'react-native';
-import { WebView } from 'react-native-webview';
+import { WebView } from '@tradle/react-native-webview';
 
 
 import htmlContent from './injectedHtml';
